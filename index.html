@@ -46,7 +46,7 @@
 
         saveButton.addEventListener("click", () => {
             if (editingElement) {
-                editingElement.firstChild.textContent = inputElement.value; // Update text content
+                editingElement.firstChild.textContent = inputElement.value; 
                 inputElement.value = "";
                 editingElement = null;
                 addButton.style.display = "inline";
