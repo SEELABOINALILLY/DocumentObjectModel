@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Dynamically add and delete list Items</h1>
+    <input type="text" id="itemput" placeholder="enter an item"/>
+    <button id="addItemButton">Add item</button>
+    <ul id="ulelement"></ul>
+    <script>
+        let inputlement=document.getElementById("itemput");
+        let buttonele=document.getElementById("addItemButton");
+        let ulelemt=document.getElementById("ulelement");
+       
+
+        buttonele.addEventListener("click",()=>{
+            if(inputlement.value!=="")
+            {
+                let lielement=document.createElement("li");
+                lielement.textContent=inputlement.value;
+                ulelemt.appendChild(lielement);
+                inputlement.value="";
+                let deleteItem=document.createElement("button");
+                deleteItem.textContent="Delete"
+                lielement.appendChild(deleteItem);
+                deleteItem.addEventListener("click",()=>{
+                    lielement.remove();
+                })
+                
+                let editelement=document.createElement("button");
+                editelement.textContent="edit";
+                //editelement.textContent=inputlement.value;
+                lielement.appendChild(editelement);
+                editelement.addEventListener("click",()=>{
+                    inputlement.value=editelement.textContent;
+                   
+                })
+            }
+           
+        })
+       
+    </script>
+</body>
+</html>
