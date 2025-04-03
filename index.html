@@ -6,42 +6,53 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Dynamically add and delete list Items</h1>
-    <input type="text" id="itemput" placeholder="enter an item"/>
-    <button id="addItemButton">Add item</button>
+    <h1>Dynamically Add and Delete List Items</h1>
+    <input type="text" id="itemput" placeholder="Enter an item"/>
+    <button id="addItemButton">Add Item</button>
+    <button id="saveItemButton" style="display: none;">Save</button>
     <ul id="ulelement"></ul>
     <script>
-        let inputlement=document.getElementById("itemput");
-        let buttonele=document.getElementById("addItemButton");
-        let ulelemt=document.getElementById("ulelement");
-       
+        let inputElement = document.getElementById("itemput");
+        let addButton = document.getElementById("addItemButton");
+        let saveButton = document.getElementById("saveItemButton");
+        let ulElement = document.getElementById("ulelement");
+        let editingElement = null; 
 
-        buttonele.addEventListener("click",()=>{
-            if(inputlement.value!=="")
-            {
-                let lielement=document.createElement("li");
-                lielement.textContent=inputlement.value;
-                ulelemt.appendChild(lielement);
-                inputlement.value="";
-                let deleteItem=document.createElement("button");
-                deleteItem.textContent="Delete"
-                lielement.appendChild(deleteItem);
-                deleteItem.addEventListener("click",()=>{
-                    lielement.remove();
-                })
-                
-                let editelement=document.createElement("button");
-                editelement.textContent="edit";
-                //editelement.textContent=inputlement.value;
-                lielement.appendChild(editelement);
-                editelement.addEventListener("click",()=>{
-                    inputlement.value=editelement.textContent;
-                   
-                })
+        addButton.addEventListener("click", () => {
+            if (inputElement.value !== "") {
+                let liElement = document.createElement("li");
+                liElement.textContent = inputElement.value;
+                ulElement.appendChild(liElement);
+                inputElement.value = "";
+
+                let deleteItem = document.createElement("button");
+                deleteItem.textContent = "Delete";
+                liElement.appendChild(deleteItem);
+                deleteItem.addEventListener("click", () => {
+                    liElement.remove();
+                });
+
+                let editItem = document.createElement("button");
+                editItem.textContent = "Edit";
+                liElement.appendChild(editItem);
+                editItem.addEventListener("click", () => {
+                    inputElement.value = liElement.firstChild.textContent; // Get text content directly
+                    editingElement = liElement;
+                    addButton.style.display = "none";
+                    saveButton.style.display = "inline";
+                });
             }
-           
-        })
-       
+        });
+
+        saveButton.addEventListener("click", () => {
+            if (editingElement) {
+                editingElement.firstChild.textContent = inputElement.value; // Update text content
+                inputElement.value = "";
+                editingElement = null;
+                addButton.style.display = "inline";
+                saveButton.style.display = "none";
+            }
+        });
     </script>
 </body>
 </html>
