@@ -4,22 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-     <style>
+    <style>
         img{
-          width: 200px;
-          height: 200px;    
+            height: 200px;
+            width: 200px;
         }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #be7af1;
+            margin: 20px;
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #022750;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
         .product-card {
             background: white;
-            width: 200px;
+            width: 220px;
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             position: relative;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
         }
-        
-     </style>
+        .product-card:hover{
+            background-color:rgb(241, 128, 241);
+        }
+        .product-card:focus{
+            background-color: aqua;
+        }
+        .product-card:active{
+            background-color:rgb(139, 247, 139);
+        }
+        p{
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0;
+            text-align: justify;
+        }
+
+    </style>
 </head>
 <body>
     <ul id="root"></ul>
@@ -44,27 +85,23 @@
         
         function fetchData3(){
             Productsdata.forEach((Element)=>{
-                let lielement=document.createElement("li");
+                let card=document.createElement("div");
+                card.className="product-card";
+
+                let lielement=document.createElement("h3");
                 lielement.textContent=Element.title;
-                ulElement.appendChild(lielement);
+                card.appendChild(lielement);
 
-                let description=document.createElement("li");
+                let description=document.createElement("p");
                 description.textContent=Element.description;
-                ulElement.appendChild(description);
+                card.appendChild(description);
 
-                let liElement2=document.createElement("li");
-                liElement2.textContent=Element.stock;
-                ulElement.appendChild(liElement2);
-
-                let liElement3=document.createElement("li");
-                liElement3.textContent=Element.category;
-                ulElement.appendChild(liElement3);
 
                 let imageTag=document.createElement("img");
                 imageTag.src=Element.images;
-                ulElement.appendChild(imageTag);
+                card.appendChild(imageTag);
 
-
+                ulElement.appendChild(card);
 
                 
             })
