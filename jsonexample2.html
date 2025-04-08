@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style>
+        img{
+          width: 200px;
+          height: 200px;    
+        }
+        .product-card {
+            background: white;
+            width: 200px;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+     </style>
+</head>
+<body>
+    <ul id="root"></ul>
+    <button id="button" onclick="displayData()">Products</button>
+    <script>
+        let ulElement=document.getElementById("root");
+        var Productsdata=[];
+        function displayData(){
+            fetch("https://dummyjson.com/products")
+            .then((response)=>{
+                return response.json();
+            })
+            .then((data)=>{
+                Productsdata = data.products;
+                console.log(Productsdata);
+                fetchData3();
+            })
+            .catch((error)=>{
+                console.log("No data found");
+            })
+        }
+        
+        function fetchData3(){
+            Productsdata.forEach((Element)=>{
+                let lielement=document.createElement("li");
+                lielement.textContent=Element.title;
+                ulElement.appendChild(lielement);
+
+                let description=document.createElement("li");
+                description.textContent=Element.description;
+                ulElement.appendChild(description);
+
+                let liElement2=document.createElement("li");
+                liElement2.textContent=Element.stock;
+                ulElement.appendChild(liElement2);
+
+                let liElement3=document.createElement("li");
+                liElement3.textContent=Element.category;
+                ulElement.appendChild(liElement3);
+
+                let imageTag=document.createElement("img");
+                imageTag.src=Element.images;
+                ulElement.appendChild(imageTag);
+
+
+
+                
+            })
+        }
+
+    </script>
+</body>
+</html>
