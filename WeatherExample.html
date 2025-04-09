@@ -29,11 +29,24 @@
         }
 
         function fetchData(weatherdata){
-            
-            let lielement=document.createElement("li")
+
+            let Name=document.createElement("h3");
+            Name.textContent=weatherdata.location.name;
+            ulElement.appendChild(Name);
+
+            let lielement=document.createElement("h3")
             lielement.textContent=weatherdata.location.region;
             ulElement.appendChild(lielement);
+
+            let temperature=document.createElement("h3")
+            temperature.textContent=weatherdata.current.temp_c;
+            ulElement.appendChild(temperature);
+
+            let temperature2=document.createElement("h3");
+            temperature2.textContent=weatherdata.current.temp_f
+            ulElement.appendChild(temperature2);
                     
+            
         }
     </script>
 </body>
